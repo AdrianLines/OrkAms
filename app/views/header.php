@@ -48,9 +48,9 @@ if (!isset($isHomepage)) {
     
     <header class="site-header">
       <a href="/">
-        <div data-aos="fade-right"
-     data-aos-offset="300"
-     data-aos-easing="ease-in-sine" class="logo">Orkney Webcams</div>
+        <div  <?= $isHomepage ? " data-aos='fade-right'
+     data-aos-offset='300'
+     data-aos-easing='ease-in-sine'" : "" ?>  class="logo">Orkney Webcams</div>
       </a>
       
       <?php
@@ -64,9 +64,9 @@ if (!isset($isHomepage)) {
             // loop through each menu item
             foreach ( $menuContent->data->menu_links as $link ) { 
           ?>
-          <li><a data-aos="fade-right"
-     data-aos-offset="300"
-     data-aos-easing="ease-in-sine" href="<?= Link::asUrl($link->link, $prismic->linkResolver) ?>"><?= RichText::asText($link->label) ?></a></li>
+          <li><a <?= $isHomepage ? " data-aos='fade-right'
+     data-aos-offset='300'
+     data-aos-easing='ease-in-sine'" : "" ?>  href="<?= Link::asUrl($link->link, $prismic->linkResolver) ?>"><?= RichText::asText($link->label) ?></a></li>
           <?php } ?>
         </ul>
       </nav>
