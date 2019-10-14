@@ -19,7 +19,12 @@ $isHomepage = true;
 <section class="homepage-banner" >
   <div class="banner-content container">
     <h2 class="banner-title" data-aos="fade-up"><?= RichText::asText($banner->title) ?></h2>
-    <p class="banner-description"><?= RichText::asText($banner->tagline) ?></p>
+    <p data-aos="fade-left"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="500"
+     data-aos-delay="300"
+     class="banner-description"><?= RichText::asText($banner->tagline) ?></p>
   
 
 
