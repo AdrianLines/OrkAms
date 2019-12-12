@@ -13,9 +13,9 @@ $title = SITE_TITLE;
 $isHomepage = false;
 
 ?>
-<?php include 'header.php'; ?>
+<?php include 'header.php'; 
 
-<?
+
 foreach($camContent->results as $camera){
     echo($camera->data->location->latitude);
 
