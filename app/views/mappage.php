@@ -17,10 +17,10 @@ $isHomepage = false;
 
 <?
 foreach($camContent->results as $camera){
-    print_r($camera->data->location->latitude);
+    echo($camera->data->location->latitude);
 
-    print_r($camera->data->location->longitude);
-    print_r("break   ");
+    echo($camera->data->location->longitude);
+    echo("break   ");
 }
 
 
