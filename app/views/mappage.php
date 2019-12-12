@@ -14,17 +14,8 @@ $isHomepage = false;
 
 ?>
 <?php include 'header.php'; 
+?> 
 
-
-foreach($camContent->results as $camera){
-    echo($camera->data->location->latitude);
-
-    echo($camera->data->location->longitude);
-    echo("break   ");
-}
-
-
-?>
     <style>
        /* Set the size of the div element that contains the map */
       #map {
@@ -39,13 +30,28 @@ foreach($camContent->results as $camera){
     <script>
 // Initialize and add the map
 function initMap() {
-  // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
+  
+ 
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
+      document.getElementById('map'), {zoom: 6, center: {lat: 60.2184777,lng: -1.5333939}});
   // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
+  var marker = new google.maps.Marker({position: {lat: 60.2184777,lng: -1.5333939}, map: map});
+
+  <?php 
+
+foreach($camContent->results as $camera){
+ 
+
+    ?>
+    var camLoc = {lat: <?php echo $camera->data->location->latitude ?> , lng: <?php echo $camera->data->location->longitude ?> };
+
+    var marker = new google.maps.Marker({position: camLoc, map: map});
+    
+    <?php   
+}
+?>
+
 }
     </script>
     <!--Load the API from the specified URL
