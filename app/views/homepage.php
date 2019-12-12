@@ -5,7 +5,7 @@ use Prismic\Dom\RichText;
 $prismic = $WPGLOBAL['prismic'];
 $pageContent = $WPGLOBAL['pageContent'];
 $menuContent = $WPGLOBAL['menuContent'];
-$camContent = $WPGLOBAL['camContent'];
+$camContent = $WPGLOBAL['camContent'];  
 
 $title = SITE_TITLE;
 $isHomepage = true;
@@ -40,10 +40,10 @@ $isHomepage = true;
     
   </div>
 </section>
-<svg  class ="chevronCenter"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M12.505 8.698L10 11L7.494 8.698a.512.512 0 0 0-.718 0a.5.5 0 0 0 0 .71l2.864 2.807a.51.51 0 0 0 .717 0l2.864-2.807a.498.498 0 0 0 0-.71a.51.51 0 0 0-.716 0zM10 .4A9.6 9.6 0 0 0 .4 10c0 5.303 4.298 9.6 9.6 9.6s9.6-4.297 9.6-9.6A9.6 9.6 0 0 0 10 .4zm0 17.954A8.353 8.353 0 0 1 1.646 10A8.354 8.354 0 1 1 10 18.354z" fill="#626262"/><rect x="0" y="0" width="20" height="20" fill="rgba(0, 0, 0, 0)" /></svg>
+<div style = "position:absolute; bottom: 0; padding: 1%;  transform: translateX(-50%); left:50%;"> <p>Take a listen to our radio station while you view the scenery</p> 
+<iframe src="https://r1.zetcast.net/public/adrian_lines/embed" frameborder="0" allowtransparency="true" style="width: 100%; min-height: 150px; border: 0; "></iframe>
+</div>
       </div><!-- splash close -->
-<div class="container"  data-wio-id=<?= $pageContent->id ?>>
-  
 
     <?php
 
@@ -75,18 +75,22 @@ $siteInfo3 = $pageContent->data->page_content[0]->primary->site_information_3;
             
 
             ?>
-            <a href = "/cameras/<?= $camera->uid ?>"><div class = "flexitem" data-aos="fade-up">
+            <a href = "/cameras/<?= $camera->uid ?>"><div class = "flexitem camcard" data-aos="fade-up">
             <div class = "titlecard"><?= RichText::asHtml($camera->data->camera_title);
              ?></div>
-            <div class = "img-hover-zoom">
+             
+           
             	
 <img
     src="<?= $camera->data->card_image->url ?>"
     alt="<?= $camera->data->card_image->alt ?>"
 />
             
-             </div></a>
+            </a>
+            <div style = "padding: 1%"><?= RichText::asHtml($camera->data->camera_desc);
+             ?></div>
             </div>
+           
             <?php
           };
 
@@ -100,6 +104,12 @@ $siteInfo3 = $pageContent->data->page_content[0]->primary->site_information_3;
 <div>
 <div class = "siteInfo invert">
 <?= RichText::asHtml($siteInfo3); ?>
+<div>
+<a href = "/map">
+Click Here to See the map
+</a>
+
+</div>
 </div> 
  </div>
     

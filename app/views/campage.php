@@ -6,6 +6,7 @@ use Prismic\Dom\RichText;
 $prismic = $WPGLOBAL['prismic'];
 $pageContent = $WPGLOBAL['pageContent'];
 $menuContent = $WPGLOBAL['menuContent'];
+$camContent = $WPGLOBAL['camContent'];
 
 $title = SITE_TITLE;
 $isHomepage = false;
@@ -25,8 +26,15 @@ $isHomepage = false;
   	
     <div class = "cameraEmbed">
       <div class = "cameraLink">
-    <?= $pageContent->data->camera_link->html ?>
-    </div>
+      <video-js id=vid1 width=720  height=480 class="vjs-default-skin" controls>
+  <source
+     src="https://uk-gos-edge-01.zetcast.net/dB8b7MWD0jx2UkuB/2520684020441552/playlist.m3u8"
+     type="application/x-mpegURL">
+</video-js>
+<script>
+var player = videojs('vid1');
+player.play();
+</script> </div>
     <div class = "flexcontainer flexcontainer-cameraEmbed">
       <div class = "feed">feed#1</div>
       <div class = "feed"> feed#2</div>
@@ -36,18 +44,93 @@ $isHomepage = false;
 
 </div><!-- flexcontainer close -->
 <div class = "aboutTitle normal">
+
+SPONSOR INFORMATION TO  GO HERE *****
+
+<?php print_r($pageContent->data->sponsor) ?>
 <div>
-  information about who sponsors the cameras to go here 
+
 </div>
 
 </div>
 
 <div class = "aboutTitle invert">
-<div>
-  Banner with cameras to go here
-</div>
+  <section id="slideshow">  <!-- This works now. todo - add in dynamic approach to adding cameras to the bar. --> 
+<div class="slick multiple-items">
+    <?php 
+            // loop through each menu item
+            foreach ( $camContent->results as $camera) { 
+            
 
+            ?>
+            <a style ="padding :1%"href = "/cameras/<?= $camera->uid ?>"><div>
+            <div class = "titlecard2"><?= RichText::asHtml($camera->data->camera_title);
+             ?></div>
+            
+            	
+<img
+    src="<?= $camera->data->card_image->url ?>"
+    alt="<?= $camera->data->card_image->alt ?>"
+/>
+
+            </div>
+            </a>
+            
+            <?php
+          };
+
+            ?>   
+  </div>
+  </section>
 </div>
 </div> <!-- container close -->
-
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('#slideshow .slick').slick({
+  dots: true,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 5,
+  slidesToScroll: 5,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 770,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+    });
+  </script>
+ 
 <?php include 'footer.php'; ?>

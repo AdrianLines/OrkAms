@@ -52,7 +52,30 @@ $response = $api->query(
 
 
 
+// Map page
+$app->get('/map', function ($request, $response) use ($app, $prismic) {
+  
+  // Query the homepage content
+  $api = $prismic->get_api();
+  $pageContent = $api->getSingle('mappage');
 
+  	
+		// Query the menu content
+  $menuContent = $api->getSingle('menu');
+  if (!$menuContent) {
+    $menuContent = null;
+  }
+
+$camContent = $api->query(
+    Predicates::at('document.type', 'campage'),
+    [ 'orderings' => '[my.campage.date desc]' ]
+);
+  
+ 
+  
+  // Render the homepage
+  render($app, 'mappage', array('pageContent' => $pageContent,'menuContent' => $menuContent,'camContent'=>$camContent));
+});
 
 
 // Index page
@@ -109,6 +132,12 @@ $app->get('/cameras/{uid}', function ($request, $response, $args) use ($app, $pr
     $menuContent = null;
   }
 
+  //Get content for other cameras to display on bar at the bottom of camera page.
+  $cameras = $api->query(
+    Predicates::at('document.type', 'campage'),
+    [ 'orderings' => '[my.campage.date desc]' ]
+);
+
   // Render the 404 page if no page document is found
   if (!$pageContent) {
     render($app, '404', array('pageContent' => null, 'menuContent' => $menuContent));
@@ -116,5 +145,5 @@ $app->get('/cameras/{uid}', function ($request, $response, $args) use ($app, $pr
   }
   
   // Otherwise render the page
-  render($app, 'campage', array('pageContent' => $pageContent, 'menuContent' => $menuContent));
+  render($app, 'campage', array('pageContent' => $pageContent, 'menuContent' => $menuContent, 'camContent' => $cameras));
 });
