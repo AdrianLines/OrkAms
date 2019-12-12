@@ -15,7 +15,16 @@ $isHomepage = false;
 ?>
 <?php include 'header.php'; ?>
 
-<? print_r($camContent) ?>
+<?
+foreach($camContent->results as $camera){
+    print_r($camera->data->location->latitude);
+
+    print_r($camera->data->location->longitude);
+    print_r("break   ");
+}
+
+
+?>
     <style>
        /* Set the size of the div element that contains the map */
       #map {
